@@ -430,14 +430,11 @@ def generate_raw_qc(
         "type": "dropdown",
     }
     value = DropdownMetric(**value_with_options)
-    if visualization_output is not None:
-        if recording_name in visualization_output:
-            timeseries_link = visualization_output[recording_name].get("timeseries")
+    timeseries_str = None
+    if visualization_output is not None and recording_name in visualization_output:
+        timeseries_link = visualization_output[recording_name].get("timeseries")
+        if timeseries_link is not None:
             timeseries_str = f"[Sortingview]({timeseries_link})"
-        else:
-            timeseries_str = None
-    else:
-        timeseries_str = None
 
     raw_metric_description = (
         "This metric displays raw data snippets for both for AP and LFP streams. "
